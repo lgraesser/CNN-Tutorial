@@ -13,8 +13,8 @@ from model import CNN, VGGLike
 
 '''Setup command line arguments'''
 parser = argparse.ArgumentParser(description='CNN tutorial')
-parser.add_argument('--lr', type=float, default=0.001,
-                    help='learning rate (default: 0.001)')
+parser.add_argument('--lr', type=float, default=0.0005,
+                    help='learning rate (default: 0.0005)')
 parser.add_argument('--bs', type=int, default=32,
                     help='batch size (default 32)')
 parser.add_argument('--epochs', type=int, default=10,
@@ -67,7 +67,7 @@ elif args.nettype == 1:
     net = VGGLike(in_dim, filters, dropout, nclasses)
     name = 'VGGlike'
 elif args.nettype == 2:
-    print("Not implmented yet")
+    print("Not implemented yet")
     sys.exit()
 else:
     print("Unknown net type")
@@ -83,7 +83,7 @@ if torch.cuda.is_available() and cuda:
     print("Using device: {}".format(cuda_device))
     torch.cuda.device(args.device)
     net.cuda()
-    loss = loss.cuda()
+    criterion = criterion.cuda()
 else:
     print("CUDA is NOT available, training on CPU")
 
@@ -92,3 +92,7 @@ for i in range(1, num_epochs + 1):
     train(i, net, trainloader, criterion, optimizer, cuda, batch_size)
     evaluate(i, net, testloader, criterion, optimizer, cuda, batch_size)
     torch.save(net.state_dict(), "./models/" + name + "_" + str(i) + ".pth")
+    '''Decay learning rate'''
+    learning_rate = learning_rate * 0.95
+    optimizer = optim.Adam(net.params, lr=learning_rate)
+    print(f"Learning rate: {learning_rate}")
