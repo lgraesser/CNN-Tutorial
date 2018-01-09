@@ -27,7 +27,7 @@ def train(epoch, net, dataloader, criterion, optimizer, cuda, batch_size):
             print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                 epoch, batch_idx * len(data), len(dataloader.dataset),
                 100. * batch_idx / len(dataloader), loss.data[0]))
-    total_loss /= len(dataloader.dataset)
+    total_loss = (total_loss * batch_size) / len(dataloader.dataset)
     print('Training set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)'.format(
         total_loss, correct, len(dataloader.dataset),
         100. * correct / len(dataloader.dataset)))
@@ -50,7 +50,7 @@ def evaluate(epoch, net, dataloader, criterion, optimizer, cuda, batch_size):
         pred = output.data.max(1, keepdim=True)[1]
         correct += pred.eq(target.data.view_as(pred)).cpu().sum()
         total_loss += loss.data[0]
-    total_loss /= len(dataloader.dataset)
+    total_loss = (total_loss * batch_size) / len(dataloader.dataset)
     print('Validation set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)'.format(
         total_loss, correct, len(dataloader.dataset),
         100. * correct / len(dataloader.dataset)))

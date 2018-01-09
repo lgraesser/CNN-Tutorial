@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+from torch.autograd import Variable
 
 
 def init_layers(params, layer_type):
@@ -40,6 +41,63 @@ class CNN(nn.Module):
     def forward(self, x):
         x = self.conv_model(x)
         x = x.view(-1, 800)
+        x = self.flat_model(x)
+        return x
+
+    def __str__(self):
+        return self.conv_model.__str__() + '\n' + self.flat_model.__str__()
+
+
+class VGGLike(nn.Module):
+    '''
+    Original paper: https://arxiv.org/pdf/1409.1556.pdf
+    Dropout before or after max pooling?
+    https://stats.stackexchange.com/questions/147850/are-pooling-layers-added-before-or-after-dropout-layers
+    '''
+
+    def __init__(self, in_dim, filt, drop_p, nclasses):
+        super(VGGLike, self).__init__()
+        self.in_dim = in_dim
+        layers = []
+        # Block 1
+        layers += [nn.Conv2d(3, filt, kernel_size=3)]
+        layers += [nn.ReLU()]
+        layers += [nn.Conv2d(filt, filt, kernel_size=3)]
+        layers += [nn.ReLU()]
+        layers += [nn.MaxPool2d(2)]
+        layers += [nn.Dropout2d(drop_p)]
+        # Block 2
+        layers += [nn.Conv2d(filt, filt * 2, kernel_size=3)]
+        layers += [nn.ReLU()]
+        layers += [nn.Conv2d(filt * 2, filt * 2, kernel_size=3)]
+        layers += [nn.ReLU()]
+        layers += [nn.MaxPool2d(2)]
+        layers += [nn.Dropout2d(drop_p)]
+        # Block 3
+        layers += [nn.Conv2d(filt * 2, filt * 4, kernel_size=3)]
+        layers += [nn.ReLU()]
+        layers += [nn.Conv2d(filt * 4, filt * 4, kernel_size=3)]
+        layers += [nn.ReLU()]
+        layers += [nn.Dropout2d(drop_p)]
+        self.conv_model = nn.Sequential(*layers)
+        # Dense model
+        self.num_flat_feats = self.get_conv_output_size()
+        layers = []
+        layers += [nn.Linear(in_features=self.num_flat_feats, out_features=nclasses)]
+        layers += [nn.ReLU()]
+        self.flat_model = nn.Sequential(*layers)
+        self.params = list(self.conv_model.parameters()) + list(self.flat_model.parameters())
+        init_layers(self.params, 'Conv')
+        init_layers(self.params, 'Linear')
+
+    def get_conv_output_size(self):
+        x = Variable(torch.ones(1, *self.in_dim))
+        x = self.conv_model(x)
+        return x.numel()
+
+    def forward(self, x):
+        x = self.conv_model(x)
+        x = x.view(-1, self.num_flat_feats)
         x = self.flat_model(x)
         return x
 

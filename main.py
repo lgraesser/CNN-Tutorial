@@ -9,7 +9,7 @@ import torch.optim as optim
 from torch.autograd import Variable
 from data import classes, basicTransform, augmentedTransform
 from train_and_eval import train, evaluate
-from model import CNN
+from model import CNN, VGGLike
 
 '''Setup command line arguments'''
 parser = argparse.ArgumentParser(description='CNN tutorial')
@@ -55,11 +55,15 @@ testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size,
 
 '''Initialize network, optimizer, and loss function'''
 if args.nettype == 0:
+    print("Model is a basic CNN")
     net = CNN(dropout, nclasses)
     name = 'basicCNN'
 elif args.nettype == 1:
-    print("Not implemented yet")
-    sys.exit()
+    print("Model is a VGG like CNN")
+    in_dim = (3, 32, 32)
+    initial_filters = 8
+    net = VGGLike(in_dim, initial_filters, dropout, nclasses)
+    name = 'VGGlike'
 elif args.nettype == 2:
     print("Not implmented yet")
     sys.exit()

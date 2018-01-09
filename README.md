@@ -14,10 +14,37 @@ conda env create -n cnn_tutorial -f environment.yml
 source activate cnn_tutorial
 ```
 
-**Run default settings**
+**Create data and model folders**
+```bash
+mkdir data
+mkdir models
+```
+
+**To train a basic CNN with default settings**
 ```bash
 python main.py
 ```
+
+**To train a VGG like net**
+```bash
+python main.py --nettype 1
+```
+
+**To train a Residual Network**
+```bash
+python main.py --nettype 2
+```
+
+### Results after 20 epochs:
+1. Basic CNN:
+  - Train:
+  - Test:
+2. VGG like net
+  - Train:
+  - Test:
+3. ResNet
+  - Train:
+  - Test:
 
 ### Sources
 
