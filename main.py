@@ -17,7 +17,7 @@ parser.add_argument('--lr', type=float, default=0.0005,
                     help='learning rate (default: 0.0005)')
 parser.add_argument('--bs', type=int, default=32,
                     help='batch size (default 32)')
-parser.add_argument('--epochs', type=int, default=10,
+parser.add_argument('--epochs', type=int, default=20,
                     help='number epochs (default 10)')
 parser.add_argument('--transforms', type=str, default='basic',
                     help='which transforms to use (default = "basic", others opts: "augmented")')
@@ -27,8 +27,8 @@ parser.add_argument('--device', type=int, default=0,
                     help='select GPU device')
 parser.add_argument('--nettype', type=int, default=0,
                     help='which type of CNN to use (default = 0: basic, 1 = VGG like, 2 = ResNet)')
-parser.add_argument('--dropout', type=float, default=0.4,
-                    help='dropout percentage (default: 0.4)')
+parser.add_argument('--dropout', type=float, default=0.3,
+                    help='dropout percentage (default: 0.3)')
 parser.add_argument('--filters', type=int, default=32,
                     help='initial number of filters for VGG like net and ResNets (default: 32)')
 args = parser.parse_args()
