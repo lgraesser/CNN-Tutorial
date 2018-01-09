@@ -29,6 +29,8 @@ parser.add_argument('--nettype', type=int, default=0,
                     help='which type of CNN to use (default = 0: basic, 1 = VGG like, 2 = ResNet)')
 parser.add_argument('--dropout', type=float, default=0.4,
                     help='dropout percentage (default: 0.4)')
+parser.add_argument('--filters', type=int, default=32,
+                    help='initial number of filters for VGG like net and ResNets (default: 32)')
 args = parser.parse_args()
 print(args)
 
@@ -39,6 +41,7 @@ learning_rate = args.lr
 cuda = args.cuda
 cuda_device = args.device
 dropout = args.dropout
+filters = args.filters
 transform = augmentedTransform if args.transforms == 'augmented' else basicTransform
 nclasses = 10
 
@@ -61,8 +64,7 @@ if args.nettype == 0:
 elif args.nettype == 1:
     print("Model is a VGG like CNN")
     in_dim = (3, 32, 32)
-    initial_filters = 8
-    net = VGGLike(in_dim, initial_filters, dropout, nclasses)
+    net = VGGLike(in_dim, filters, dropout, nclasses)
     name = 'VGGlike'
 elif args.nettype == 2:
     print("Not implmented yet")
