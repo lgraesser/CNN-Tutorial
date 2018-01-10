@@ -37,11 +37,11 @@ python main.py --nettype 2
 
 ### Results after 20 epochs:
 1. Basic CNN:
-  - Train:
-  - Test:
+  - Train: 55%
+  - Test: 55%
 2. VGG like net
-  - Train:
-  - Test:
+  - Train: 85%
+  - Test: 80%
 3. ResNet
   - Train:
   - Test:
