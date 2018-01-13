@@ -31,6 +31,8 @@ parser.add_argument('--filters', type=int, default=32,
                     help='initial number of filters for VGG like net and ResNets (default: 32)')
 parser.add_argument('--model_path', type=str, default='./models/',
                     help='directory to save models in')
+parser.add_argument('--data_path', type=str, default='./data',
+                    help='directory to store data in')
 args = parser.parse_args()
 print(args)
 
@@ -43,16 +45,17 @@ cuda_device = args.device
 dropout = args.dropout
 filters = args.filters
 model_path = args.model_path
+data_path = args.data_path
 transform = basicTransform
 nclasses = 10
 
 '''Load training and test data'''
-trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
+trainset = torchvision.datasets.CIFAR10(root=data_path, train=True,
                                         download=True, transform=transform)
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
                                           shuffle=True, num_workers=2)
 
-testset = torchvision.datasets.CIFAR10(root='./data', train=False,
+testset = torchvision.datasets.CIFAR10(root=data_path, train=False,
                                        download=True, transform=transform)
 testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size,
                                          shuffle=False, num_workers=2)
