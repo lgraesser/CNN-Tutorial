@@ -103,7 +103,8 @@ for i in range(1, num_epochs + 1):
     evaluate(i, net, testloader, criterion, cuda, batch_size)
     net.cpu()
     torch.save(net.state_dict(), model_path + name + "_" + str(i) + ".pth")
-    net.gpu()
+    if torch.cuda.is_available() and cuda:
+        net.cuda()
     if i % 2 == 0:
         '''Decay learning rate'''
         learning_rate = learning_rate * 0.95
