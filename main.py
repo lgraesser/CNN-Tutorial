@@ -1,6 +1,4 @@
 import argparse
-import matplotlib.pyplot as plt
-import numpy as np
 import torch
 import torch.nn as nn
 import torchvision
@@ -102,7 +100,7 @@ else:
 '''Train and evaluate model'''
 for i in range(1, num_epochs + 1):
     train(i, net, trainloader, criterion, optimizer, cuda, batch_size)
-    evaluate(i, net, testloader, criterion, optimizer, cuda, batch_size)
+    evaluate(i, net, testloader, criterion, cuda, batch_size)
     torch.save(net.state_dict(), model_path + name + "_" + str(i) + ".pth")
     '''Decay learning rate'''
     learning_rate = learning_rate * 0.95

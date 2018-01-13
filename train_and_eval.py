@@ -33,7 +33,7 @@ def train(epoch, net, dataloader, criterion, optimizer, cuda, batch_size):
         100. * correct / len(dataloader.dataset)))
 
 
-def evaluate(epoch, net, dataloader, criterion, optimizer, cuda, batch_size):
+def evaluate(epoch, net, dataloader, criterion, cuda, batch_size):
     net.eval()
     correct = 0
     total_loss = 0
