@@ -15,7 +15,7 @@ parser.add_argument('--lr', type=float, default=0.0005,
                     help='learning rate (default: 0.0005)')
 parser.add_argument('--bs', type=int, default=32,
                     help='batch size (default 32)')
-parser.add_argument('--epochs', type=int, default=20,
+parser.add_argument('--epochs', type=int, default=30,
                     help='number epochs (default 10)')
 parser.add_argument('--cuda', type=int, default=1,
                     help='whether to use cuda')
@@ -102,7 +102,8 @@ for i in range(1, num_epochs + 1):
     train(i, net, trainloader, criterion, optimizer, cuda, batch_size)
     evaluate(i, net, testloader, criterion, cuda, batch_size)
     torch.save(net.state_dict(), model_path + name + "_" + str(i) + ".pth")
-    '''Decay learning rate'''
-    learning_rate = learning_rate * 0.95
-    optimizer = optim.Adam(net.params, lr=learning_rate)
+    if i % 2 == 0:
+        '''Decay learning rate'''
+        learning_rate = learning_rate * 0.95
+        optimizer = optim.Adam(net.params, lr=learning_rate)
     print(f"Learning rate: {learning_rate}")

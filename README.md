@@ -35,16 +35,26 @@ python main.py --nettype 1
 python main.py --nettype 2
 ```
 
-### Results after 20 epochs:
+**To evaluate a trained model on the training and test dataset**
+```bash
+python run_trained_models.py --nettype x --model_path path/to/saved_model
+```
+x = 0 (basic CNN), 1 (VGG like net), 2 (Residual network)
+
+Please note: The `nettype` must match the saved model. Additionally for the VGG Like net and the Residual Network the number of filters and dropout percentage must match between the initialized and saved model. If you are using a Residual network the number of residual blocks must also match.
+
+Training and testing the models with the default settings will ensure the architectures match.
+
+### Results after 30 epochs:
 1. Basic CNN:
-  - Train: 55%
-  - Test: 55%
+  - Train: 
+  - Test:
 2. VGG like net
-  - Train: 85%
-  - Test: 80%
-3. ResNet
   - Train:
   - Test:
+3. ResNet
+  - Train: 81%
+  - Test: 80%
 
 ### Sources
 
