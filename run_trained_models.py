@@ -94,6 +94,6 @@ else:
 
 '''Evaluate model'''
 print("Model performance on training set")
-evaluate(i, net, trainloader, criterion, optimizer, cuda, batch_size)
+evaluate(0, net, trainloader, criterion, optimizer, cuda, batch_size)
 print("Model performance on validation set")
-evaluate(i, net, testloader, criterion, optimizer, cuda, batch_size)
+evaluate(0, net, testloader, criterion, optimizer, cuda, batch_size)
