@@ -1,6 +1,15 @@
 ## Convolutional Neural Networks Tutorial
 ### Women in Machine Learning and Data Science, LinkedIn, 18 January 2018
 
+Code to accompany a talk on Convolutional neural networks. It provides
+- implementations of a basic CNN, VGG-like CNN, and Residual Network in pyTorch
+- pre-trained model of each type
+- script to train each model type on CIFAR10
+- script to evaluate a trained model on CIFAR10
+
+Models will automatically be trained on a GPU if one is available.
+
+*Please Note: Slides will be posted after the talk*
 
 ### Usage
 
@@ -27,7 +36,7 @@ python main.py
 
 This will take approximately 1 minute per epoch to train on a laptop, CPU only.
 
-**To train a VGG like net**
+**To train a VGG like net using the default settings**
 ```bash
 python main.py --nettype 1
 ```
@@ -40,6 +49,14 @@ python main.py --nettype 2
 ```
 
 This will take approximately 12 - 14 minutes per epoch to train on a laptop, CPU only. It takes < 1 minute per epoch on a good GPU.
+
+**Use the command line options to change**
+- Batch size
+- Learning rate
+- Number of training epochs
+- Network type
+- Dropout rate
+- Number of initial filters
 
 **To evaluate a trained model on the training and test dataset**
 ```bash
@@ -59,14 +76,20 @@ python run_trained_models.py --nettype 1 --model_path models/VGGlike_30.pth
 
 ### Results after 30 epochs:
 1. Basic CNN:
-  - Train: 68%
-  - Test: 61%
+  - Train: 70%
+  - Test: 63%
 2. VGG like net
-  - Train: 89%
+  - Train: 87%
   - Test: 77%
 3. ResNet
   - Train: 91%
-  - Test: 81%
+  - Test: 82%
+
+**Training curves**
+
+![Training data](train.png#center)
+
+![Test data](test.png#center)
 
 ### Sources
 

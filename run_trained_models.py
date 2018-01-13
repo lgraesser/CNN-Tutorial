@@ -90,7 +90,7 @@ if torch.cuda.is_available() and cuda:
     net.cuda()
     criterion = criterion.cuda()
 else:
-    print("CUDA is NOT available, training on CPU")
+    print("CUDA is NOT available, using CPU")
 
 '''Evaluate model'''
 print("Model performance on training set")
