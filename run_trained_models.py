@@ -23,7 +23,7 @@ parser.add_argument('--dropout', type=float, default=0.3,
                     help='dropout percentage (default: 0.3)')
 parser.add_argument('--filters', type=int, default=32,
                     help='initial number of filters for VGG like net and ResNets (default: 32)')
-parser.add_argument('--model_path', type=str, default='./models/basicCNN_20.pth',
+parser.add_argument('--model_path', type=str, default='./models/basicCNN_30.pth',
                     help='directory to saved model')
 parser.add_argument('--data_path', type=str, default='./data',
                     help='directory to store data in')
@@ -83,7 +83,7 @@ print("Saved model loaded")
 
 '''Convert to cuda if available'''
 if torch.cuda.is_available() and cuda:
-    print("CUDA is available, training on GPU")
+    print("CUDA is available, using GPU")
     print("Number of available devices: {}".format(torch.cuda.device_count()))
     print("Using device: {}".format(cuda_device))
     torch.cuda.device(args.device)

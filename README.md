@@ -59,13 +59,13 @@ python run_trained_models.py --nettype 1 --model_path models/VGGlike_30.pth
 
 ### Results after 30 epochs:
 1. Basic CNN:
-  - Train:
-  - Test:
+  - Train: 68%
+  - Test: 61%
 2. VGG like net
-  - Train:
-  - Test:
+  - Train: 89%
+  - Test: 77%
 3. ResNet
-  - Train: 83%
+  - Train: 91%
   - Test: 81%
 
 ### Sources

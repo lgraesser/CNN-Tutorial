@@ -100,6 +100,9 @@ else:
 '''Train and evaluate model'''
 for i in range(1, num_epochs + 1):
     train(i, net, trainloader, criterion, optimizer, cuda, batch_size)
+    print("Results on training set")
+    evaluate(i, net, trainloader, criterion, cuda, batch_size)
+    print("Results on validation set")
     evaluate(i, net, testloader, criterion, cuda, batch_size)
     net.cpu()
     torch.save(net.state_dict(), model_path + name + "_" + str(i) + ".pth")
