@@ -1,7 +1,5 @@
 import torchvision
 import torchvision.transforms as transforms
-import matplotlib.pyplot as plt
-import numpy as np
 
 
 classes = ('plane', 'car', 'bird', 'cat',
