@@ -2,10 +2,10 @@
 ### Women in Machine Learning and Data Science, LinkedIn, 18 January 2018
 
 Code to accompany a talk on Convolutional neural networks. It provides
-- implementations of a basic CNN, VGG-like CNN, and Residual Network in pyTorch
-- pre-trained model of each type
-- script to train each model type on CIFAR10
-- script to evaluate a trained model on CIFAR10
+- implementations of a basic CNN, VGG-like CNN, and Residual Network in pyTorch in `model.py`
+- pre-trained model of each type in `models/`
+- script to train each model type on CIFAR10 in `main.py`
+- script to evaluate a trained model on CIFAR10 in `run_trained_models.py`
 
 Models will automatically be trained on a GPU if one is available.
 
