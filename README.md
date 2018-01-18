@@ -9,8 +9,6 @@ Code to accompany a talk on Convolutional neural networks. It provides
 
 Models will automatically be trained on a GPU if one is available.
 
-*Please Note: Slides will be posted after the talk*
-
 ### Usage
 
 **Installation**
